@@ -1,2 +1,2 @@
-./authentications/ca*
-./authentications/client*
+authentications/client-certificates/ca*
+authentications/client-certificates/client*
