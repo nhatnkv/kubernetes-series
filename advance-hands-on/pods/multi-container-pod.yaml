@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: multi-container-pod
+spec:
+  containers:
+    - name: nginx-1
+      image: nginx:1.19
+    - name: nginx-2
+      image: nginx:1.19

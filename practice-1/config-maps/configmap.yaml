@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2023-04-23T04:33:49Z"
+  name: my-config
+  namespace: default
+  resourceVersion: "204180"
+  uid: 275cadad-29d0-474b-b1bb-f26f22418f49
+data:
+  database.password: mypassword
+  database.url: jdbc:mysql://localhost:3306/mydb
+  database.username: myuser

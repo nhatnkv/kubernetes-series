@@ -1,0 +1,26 @@
+# Exercise 2: Create a hostPath volume
+
+# Create a pod definition YAML file with a hostPath volume that points to a directory on the host node.
+# Mount the hostPath volume to a container within the pod.
+# Deploy the pod to your Kubernetes cluster.
+# Verify that the volume is created, mounted successfully, and accessible from the container.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql-pod
+spec:
+  containers:
+  - image: mysql
+    name: mysql
+    env:
+    - name: MYSQL_ROOT_PASSWORD
+      value: password
+    volumeMounts:
+    - mountPath: /var/lib/mysql
+      name: mysql-data
+  volumes:
+  - name: mysql-data
+    hostPath:
+      path: /kubernetes/mysql
+      type: DirectoryOrCreate

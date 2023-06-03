@@ -1,0 +1,20 @@
+# Exercise 3: Create a PersistentVolume
+
+# Create a PersistentVolume YAML definition file using any storage class available in your cluster.
+# Deploy the PersistentVolume to your Kubernetes cluster.
+# Verify that the PersistentVolume is created successfully.
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-persistentvolume
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: custom-storageclass
+  hostPath:
+    path: /data
+    type: DirectoryOrCreate

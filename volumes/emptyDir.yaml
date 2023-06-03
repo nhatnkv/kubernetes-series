@@ -1,0 +1,27 @@
+# Exercise 1: Create an EmptyDir volume
+
+# Create a simple pod definition YAML file with an EmptyDir volume.
+# Mount the EmptyDir volume to a container within the pod.
+# Deploy the pod to your Kubernetes cluster.
+# Verify that the volume is created and mounted successfully.
+
+# EmptyDir volumes: Is used to provide ephemeral storage,
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql-pod
+spec:
+  containers:
+  - image: mysql
+    name: mysql
+    env:
+    - name: MYSQL_ROOT_PASSWORD
+      value: password
+    volumeMounts:
+    - mountPath: /var/lib/mysql
+      name: mysql-data
+  volumes:
+  - name: mysql-data
+    emptyDir:
+      sizeLimit: 500Mi

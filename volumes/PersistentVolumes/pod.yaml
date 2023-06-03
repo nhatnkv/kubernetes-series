@@ -1,0 +1,25 @@
+# Exercise 5: Use a PersistentVolumeClaim in a pod
+
+# Create a pod definition YAML file that uses the PersistentVolumeClaim created in Exercise 4.
+# Mount the PersistentVolumeClaim to a container within the pod.
+# Deploy the pod to your Kubernetes cluster.
+# Verify that the volume is created, mounted successfully, and accessible from the container.
+# Write some data to the volume from the container.
+# Delete the pod and recreate it using the same YAML file.
+# Verify that the data written to the volume in step 5 is still available after recreating the pod.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pod
+spec:
+  containers:
+  - name: test-container
+    image: nginx
+    volumeMounts:
+    - name: test-volume
+      mountPath: /data
+  volumes:
+  - name: test-volume
+    persistentVolumeClaim:
+      claimName: pvc-persistentvolumeclaim
