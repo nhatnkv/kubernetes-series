@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod3
+  namespace: network-policy-demo
+  labels:
+    app: allowed-pod
+spec:
+  containers:
+    - name: nginx
+      image: nginx

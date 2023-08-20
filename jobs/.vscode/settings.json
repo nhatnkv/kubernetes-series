@@ -1,0 +1,6 @@
+{
+  "yaml.schemas": {
+    "kubernetes": "*.yml",
+    "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.22.4-standalone-strict/all.json": "file:///Users/cuongbm/DevOpsRoadmap/kubernetes/jobs/backup-postgres-job.yaml"
+  }
+}
