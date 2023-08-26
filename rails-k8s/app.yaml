@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: rails
+  name: rails
+spec:
+  containers:
+  - image: nhatnkv/rails-k8s:v4
+    name: rails
+    env:
+      - name: DATABASE_HOST
+        value: mysql-int-svc
+      - name: DATABASE_USERNAME
+        valueFrom:
+          secretKeyRef:
+            name: mysql-secret
+            key: MYSQL_USER
+      - name: DATABASE_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: mysql-secret
+            key: MYSQL_PASSWORD
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
