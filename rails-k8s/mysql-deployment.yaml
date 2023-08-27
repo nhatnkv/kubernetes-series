@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: mysql
+  name: mysql
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mysql
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: mysql
+      name: mysql
+    spec:
+      containers:
+      - image: mysql
+        name: mysql
+        command: ["mysqld"]
+        args: ["--default-authentication-plugin=mysql_native_password"]
+        volumeMounts:
+          - name: mysql-pvc
+            mountPath: /var/lib/mysql
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: MYSQL_PASSWORD
+        resources: {}
+      volumes:
+        - name: mysql-pvc
+          persistentVolumeClaim:
+            claimName: mysql-pvc
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+status: {}

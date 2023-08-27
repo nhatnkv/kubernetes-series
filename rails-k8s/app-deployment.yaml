@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: rails
+  name: rails
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: rails
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: rails
+      name: rails
+    spec:
+      initContainers:
+      - name: db-setup
+        image: nhatnkv/rails-k8s:v10
+        command: ["/bin/sh", "-c", "/app/setup.sh"]
+        env:
+          - name: DATABASE_HOST
+            value: mysql-int-svc
+          - name: DATABASE_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: MYSQL_USER
+          - name: DATABASE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: MYSQL_PASSWORD
+      containers:
+      - image: nhatnkv/rails-k8s:v10
+        name: rails
+        env:
+          - name: DATABASE_HOST
+            value: mysql-int-svc
+          - name: DATABASE_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: MYSQL_USER
+          - name: DATABASE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: MYSQL_PASSWORD
+        resources: {}
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+status: {}
